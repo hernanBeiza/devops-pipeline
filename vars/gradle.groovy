@@ -12,12 +12,24 @@ def call(){
 
 	if (paramStage=="") {
 		echo "Ejecutar todo";
+		etapas();		
+	} else {
+		echo "Ejecutar solo las configuradas";
+		def pasadas = paramStage.split(":");
+		etapas(pasadas);
+	}
+}
 
+def etapas(pasadas){
+
+	if(pasadas.some("build") || pasadas.some("test")){
 		stage('build & test') {
 			echo env.STAGE_NAME
 			//Usar el gradlewrapper, incluido en el repo
 			sh './gradlew clean build'
 		}
+	}
+	if(pasadas.some("sonar"))){
 		stage('sonar') {
 			echo env.STAGE_NAME
 			//Nombre en SonarQubeScanner en AdminJenkins/ConfigureTools/SonarQubeScanner
@@ -28,28 +40,30 @@ def call(){
 				sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build"
 			}
 		}
+	}
+	if(pasadas.some("run"))){
 		stage('run') {
 			echo env.STAGE_NAME
 
 			sh 'nohup bash ./gradlew bootRun &'
 		}
+	}
+	if(pasadas.some("rest"))){
 		stage('rest') {
 			echo env.STAGE_NAME
 
 			//sh './gradle build'
 			sh "sleep 30 && curl -X GET 'http://localhost:8082/rest/mscovid/test?msg=testing'"
 		}
+	}
+	if(pasadas.some("nexus"))){
 		stage('nexus') {
 			echo env.STAGE_NAME
 
 			nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: './build/libs/DevOpsUsach2020-0.0.1.jar']], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '1.0.0']]]
 		}
-		
-	} else {
-
-		echo "Ejecutar solo las configuradas";
-
 	}
+
 }
 
 return this;
