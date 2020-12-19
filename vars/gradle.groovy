@@ -29,7 +29,7 @@ def etapas(pasadas){
 			sh './gradlew clean build'
 		}
 	}
-	if(pasadas.some("sonar"))){
+	if(pasadas.some("sonar")){
 		stage('sonar') {
 			echo env.STAGE_NAME
 			//Nombre en SonarQubeScanner en AdminJenkins/ConfigureTools/SonarQubeScanner
@@ -41,14 +41,14 @@ def etapas(pasadas){
 			}
 		}
 	}
-	if(pasadas.some("run"))){
+	if(pasadas.some("run")){
 		stage('run') {
 			echo env.STAGE_NAME
 
 			sh 'nohup bash ./gradlew bootRun &'
 		}
 	}
-	if(pasadas.some("rest"))){
+	if(pasadas.some("rest")){
 		stage('rest') {
 			echo env.STAGE_NAME
 
@@ -56,7 +56,7 @@ def etapas(pasadas){
 			sh "sleep 30 && curl -X GET 'http://localhost:8082/rest/mscovid/test?msg=testing'"
 		}
 	}
-	if(pasadas.some("nexus"))){
+	if(pasadas.some("nexus")){
 		stage('nexus') {
 			echo env.STAGE_NAME
 
