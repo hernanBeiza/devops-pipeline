@@ -28,7 +28,7 @@ def call(){
 					    stage('iniciar') {
 					    	echo "iniciar"
 					    	String paramHerramienta = params.paramHerramienta;
-					    	echo "paramHerramienta ${paramHerramienta}";
+					    	echo "paramHerramienta ${paramHerramienta}";					    	
 					    	env.ALUMNO="Hernán Beiza";
 					    	if(paramHerramienta=="maven"){
 					    		env.BUILD_TOOL="MAVEN";
@@ -48,9 +48,6 @@ def call(){
 								//Recordar que ahora los archivos están en vars
 								gradle.call();
 				    		}
-
-				    		String paramStage = params.paramStage;
-					    	echo "paramStage ${paramStage}";
 					    }
 		      		}
 				}
