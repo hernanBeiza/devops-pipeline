@@ -20,8 +20,7 @@ def call(){
 	}
 }
 
-def etapas(pasadas){
-
+def etapas(pasadas=['build','test','sonar','run','rest','nexus']){
 	if(pasadas.contains("build") || pasadas.contains("test")){
 		stage('build & test') {
 			echo env.STAGE_NAME
