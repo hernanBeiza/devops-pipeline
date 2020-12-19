@@ -7,6 +7,9 @@
 def call(){
 	echo "call(); maven.groovy";
 
+    String paramStage = params.paramStage;
+    echo "paramStage ${paramStage}";
+
     stage('build & test') {
     	//Usar el gradlewrapper, incluido en el repo
     	sh "./mvnw clean package -e"

@@ -7,6 +7,9 @@
 def call(){
 	echo "call(); gradle.groovy";
 
+	String paramStage = params.paramStage;
+    echo "paramStage ${paramStage}";
+
 	stage('build & test') {
 		//Usar el gradlewrapper, incluido en el repo
 		sh './gradlew clean build'
