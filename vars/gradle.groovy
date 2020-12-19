@@ -16,9 +16,6 @@ def call(){
 	} else {
 		echo "Ejecutar solo las configuradas";
 		def pasadas = paramStage.split(":");
-		for(item in pasadas){
-		    echo item;
-		}
 		etapas(pasadas);
 	}
 }

@@ -10,29 +10,56 @@ def call(){
     String paramStage = params.paramStage;
     echo "paramStage ${paramStage}";
 
-    stage('build & test') {
-    	//Usar el gradlewrapper, incluido en el repo
-    	sh "./mvnw clean package -e"
+    if (paramStage=="") {
+        echo "Ejecutar todo";
+        etapas();       
+    } else {
+        echo "Ejecutar solo las configuradas";
+        def pasadas = paramStage.split(":");
+        etapas(pasadas);
     }
-    stage('sonar') {
-    	//Nombre en SonarQubeScanner en AdminJenkins/ConfigureTools/SonarQubeScanner
-    	def scannerHome = tool 'sonar-scanner';
-    	//Nombre en AdminJenkins/Configuración Global/SonarQube Servers
-	    withSonarQubeEnv('sonar') { 
-	    	// If you have configured more than one global server connection, you can specify its name
-			sh './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
-		}
-	}
-    stage('run') {
-    	sh "nohup bash mvnw spring-boot:run &"
+
+}
+
+def etapas(pasadas){
+    if(pasadas.contains("build") || pasadas.contains("test")){
+        stage('build & test') {
+            echo env.STAGE_NAME
+            //Usar el gradlewrapper, incluido en el repo
+            sh "./mvnw clean package -e"
+        }
     }
-    stage('rest') {
-    	//sh './gradle build'
-    	sh "sleep 30 && curl -X GET 'http://localhost:8082/rest/mscovid/test?msg=testing'"
+    if(pasadas.contains("sonar")){
+        stage('sonar') {
+            echo env.STAGE_NAME
+            //Nombre en SonarQubeScanner en AdminJenkins/ConfigureTools/SonarQubeScanner
+            def scannerHome = tool 'sonar-scanner';
+            //Nombre en AdminJenkins/Configuración Global/SonarQube Servers
+            withSonarQubeEnv('sonar') { 
+                // If you have configured more than one global server connection, you can specify its name
+                sh './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+            }
+        }
     }
-    stage('nexus') {
-        nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: './build/DevOpsUsach2020-0.0.1.jar']], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '1.0.0']]]
-	}
+    if(pasadas.contains("run")){
+        stage('run') {
+            echo env.STAGE_NAME
+            sh "nohup bash mvnw spring-boot:run &"
+        }
+    }
+    if(pasadas.contains("rest")){
+        stage('rest') {
+            echo env.STAGE_NAME
+            //sh './gradle build'
+            sh "sleep 30 && curl -X GET 'http://localhost:8082/rest/mscovid/test?msg=testing'"
+        }
+    }
+    if(pasadas.contains("nexus")){
+        stage('nexus') {
+            echo env.STAGE_NAME
+            nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: './build/DevOpsUsach2020-0.0.1.jar']], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '1.0.0']]]
+        }
+    }
 }
 
 return this;
