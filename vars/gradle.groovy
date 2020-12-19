@@ -25,14 +25,14 @@ def call(){
 
 def etapas(pasadas){
 
-	if(pasadas.any("build") || pasadas.any("test")){
+	if(pasadas.contains("build") || pasadas.contains("test")){
 		stage('build & test') {
 			echo env.STAGE_NAME
 			//Usar el gradlewrapper, incluido en el repo
 			sh './gradlew clean build'
 		}
 	}
-	if(pasadas.any("sonar")){
+	if(pasadas.contains("sonar")){
 		stage('sonar') {
 			echo env.STAGE_NAME
 			//Nombre en SonarQubeScanner en AdminJenkins/ConfigureTools/SonarQubeScanner
@@ -44,14 +44,14 @@ def etapas(pasadas){
 			}
 		}
 	}
-	if(pasadas.any("run")){
+	if(pasadas.contains("run")){
 		stage('run') {
 			echo env.STAGE_NAME
 
 			sh 'nohup bash ./gradlew bootRun &'
 		}
 	}
-	if(pasadas.any("rest")){
+	if(pasadas.contains("rest")){
 		stage('rest') {
 			echo env.STAGE_NAME
 
@@ -59,7 +59,7 @@ def etapas(pasadas){
 			sh "sleep 30 && curl -X GET 'http://localhost:8082/rest/mscovid/test?msg=testing'"
 		}
 	}
-	if(pasadas.any("nexus")){
+	if(pasadas.contains("nexus")){
 		stage('nexus') {
 			echo env.STAGE_NAME
 
