@@ -27,12 +27,21 @@ def call(){
 					    	env.ALUMNO="Hernán Beiza";
 					    	if(paramHerramienta=="maven"){
 					    		env.BUILD_TOOL="MAVEN";
-								def ejecucionMaven = load 'maven.groovy'
-								ejecucionMaven.call()
+								//Esto no funciona usando un pipeline como librería, 
+								//porque los archivos no están dentro el workspace
+								//def ejecucionMaven = load 'maven.groovy'
+								//ejecucionMaven.call()
+								//$("{paramHerramienta").call();
+								//Recordar que ahora los archivos están en vars
+								maven.call();
 				    		} else {
 					    		env.BUILD_TOOL="GRADLE";
-								def ejecucionGradle = load 'gradle.groovy'
-								ejecucionGradle.call()
+								//Esto no funciona usando un pipeline como librería, 
+								//porque los archivos no están dentro el workspace
+								//def ejecucionGradle = load 'gradle.groovy'
+								//ejecucionGradle.call()
+								//Recordar que ahora los archivos están en vars
+								gradle.call();
 				    		}
 					    }
 		      		}
