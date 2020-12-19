@@ -7,15 +7,20 @@
 def call(){
 	pipeline {
 		agent any
-		/*
+
 		parameters {
 	    	choice(
 		        name: 'paramHerramienta',
 		        choices: "maven\ngradle",
 		        description: 'Parámetro que determinará si se ejecuta maven.groovy o gradle.groovy'
 	        )
+	        string(
+	        	name: 'paramStage',
+	        	defaultValue: '',
+	        	description: 'Etapas a ejecutar'
+        	)
 		}
-		*/
+
 		stages {
 			stage('Pipeline') {
 				steps {
@@ -43,6 +48,9 @@ def call(){
 								//Recordar que ahora los archivos están en vars
 								gradle.call();
 				    		}
+
+				    		String paramStage = params.paramStage;
+					    	echo "paramStage ${paramStage}";
 					    }
 		      		}
 				}
