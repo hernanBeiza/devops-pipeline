@@ -72,7 +72,7 @@ def etapas(pasadas=['build','test','sonar','run','rest','nexus']){
         noEncontrada = true;
     }
     if(noEncontrada){
-        echo "Tarea(s) {$pasadas} no encontrada(s)";
+        echo "Tarea(s) ${pasadas} no encontrada(s)";
     }
 }
 
