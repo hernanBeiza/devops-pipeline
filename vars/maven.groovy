@@ -3,10 +3,14 @@
 	def ejecucion = load 'script.groovy'
 	ejecucion.call()
 */
+import cl.*
 
 def call(){
 	echo "call(); maven.groovy";
 
+    def mensajes = new Mensajes();
+    mensajes.saludar("Hernán");
+    
     String paramStage = params.paramStage;
     echo "paramStage ${paramStage}";
 
