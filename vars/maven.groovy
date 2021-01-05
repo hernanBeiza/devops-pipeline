@@ -14,6 +14,8 @@ def call(){
     String paramStage = params.paramStage;
     echo "paramStage ${paramStage}";
 
+    sh "env.GIT_BRANCH";
+    /*
     if (paramStage=="") {
         echo "Ejecutar todo";
         etapas();
@@ -22,7 +24,7 @@ def call(){
         def pasadas = paramStage.split(":");
         etapas(pasadas);
     }
-
+    */
 }
 
 def etapas(pasadas=['build','test','sonar','run','rest','nexus']){
@@ -78,6 +80,16 @@ def etapas(pasadas=['build','test','sonar','run','rest','nexus']){
     if(noEncontrada){
         echo "Tarea(s) ${pasadas} no encontrada(s)";
     }
+}
+
+def ci(){
+    figlet "CI";
+    sh "env.GIT_BRANCH";
+}
+
+def cd(){
+    figlet "CD"; 
+    sh "env.GIT_BRANCH";
 }
 
 return this;

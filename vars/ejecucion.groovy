@@ -28,13 +28,15 @@ def call(){
 			      		
 			      		//Variables de entorno del sistema
 			      		//bat "set"
-			      		sh "env"
+			      		//sh "env"
 
 					    stage('iniciar') {
 					    	echo "iniciar"
 					    	String paramHerramienta = params.paramHerramienta;
 					    	echo "paramHerramienta ${paramHerramienta}";					    	
 					    	env.ALUMNO="Hernán Beiza";
+					    	echo "tipoDeRama ${validaciones.obtenerTipoDeRama()}";
+
 					    	if(paramHerramienta=="maven"){
 					    		env.BUILD_TOOL="MAVEN";
 								//Esto no funciona usando un pipeline como librería, 
@@ -43,7 +45,7 @@ def call(){
 								//ejecucionMaven.call()
 								//$("{paramHerramienta").call();
 								//Recordar que ahora los archivos están en vars
-								maven.call();
+								//maven.call();
 				    		} else {
 					    		env.BUILD_TOOL="GRADLE";
 								//Esto no funciona usando un pipeline como librería, 
@@ -51,7 +53,7 @@ def call(){
 								//def ejecucionGradle = load 'gradle.groovy'
 								//ejecucionGradle.call()
 								//Recordar que ahora los archivos están en vars
-								gradle.call();
+								//gradle.call();
 				    		}
 					    }
 		      		}

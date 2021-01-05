@@ -11,6 +11,9 @@ def call(){
 	String paramStage = params.paramStage;
     echo "paramStage ${paramStage}";
 
+    sh "env.GIT_BRANCH";
+
+	/*
 	if (paramStage=="") {
 		echo "Ejecutar todo";
 		etapas();		
@@ -19,8 +22,10 @@ def call(){
 		def pasadas = paramStage.split(":");
 		etapas(pasadas);
 	}
+	*/
 }
 
+/*
 def etapas(pasadas=['build','test','sonar','run','rest','nexus']){
     Boolean noEncontrada = false;
 
@@ -79,5 +84,14 @@ def etapas(pasadas=['build','test','sonar','run','rest','nexus']){
         echo "Tarea(s) ${pasadas} no encontrada(s)";
     }
 }
+*/
 
+def ci(pasadas=['buildAndTest','sonar','runJar','rest','nexusCI']){
+    figlet "ci";
+
+}
+
+def cd(pasadas=['downloadNexus','runDownloadedJar','rest','nexusCD']){
+	figlet "cd";
+}
 return this;
