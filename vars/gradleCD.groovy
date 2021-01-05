@@ -18,7 +18,7 @@ def etapas(pasadas=['downloadNexus','runDownloadedJar','rest','nexusCD']){
 	if(pasadas.contains("downloadNexus")){
 		stage('downloadNexus') {
 			echo env.STAGE_NAME;
-			sh "curl -X GET -u admin:admin http://localhost:8081/repository/test-nexus/com/devopsusach2020/DevOpsUsach2020/1.0.0-DEVELOP/DevOpsUsach2020-1.0.0-DEVELOP.jar -O";
+			sh "curl -X GET -u admin:admin http://localhost:8081/repository/test-nexus/com/devopsusach2020/DevOpsUsach2020/${env.VERSION}-${env.BRANCH_NAME}/DevOpsUsach2020-${env.VERSION}-${env.BRANCH_NAME}.jar -O";
 			sh "ls -l"
 		}
     } else {
@@ -44,7 +44,7 @@ def etapas(pasadas=['downloadNexus','runDownloadedJar','rest','nexusCD']){
 	if(pasadas.contains("nexusCD")){
 		stage('nexusCD') {
 			echo env.STAGE_NAME;
-			nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: './DevOpsUsach2020-1.0.0-DEVELOP.jar']], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: "${env.VERSION}-${env.BRANCH_NAME}"]]]
+			nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: "./DevOpsUsach2020-${env.VERSION}.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: "${env.VERSION}-${env.BRANCH_NAME}"]]]
 		}
 	 } else {
         noEncontrada = true;
