@@ -34,11 +34,9 @@ def call(){
 					    	env.BUILD_TOOL = paramHerramienta;
 					    	String tipoDeRama = utils.obtenerTipoDeRama();
 					    	env.BRANCH_NAME= utils.obtenerNombreDeRama();
-					    	String version = utils.obtenerVersion();
-					    	env.VERSION = version;
+					    	utils.iniciarVariablesEntorno();
 					    	echo "paramHerramienta ${paramHerramienta}";
 					    	echo "tipoDeRama ${tipoDeRama}";
-					    	echo "version ${version}";
 					    	if(paramHerramienta == "gradle" && tipoDeRama == "CD"){
 					    		gradleCD.iniciar();
 					    	} else if (paramHerramienta == "gradle" && tipoDeRama == "CI"){

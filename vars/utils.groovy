@@ -50,26 +50,6 @@ def verificarArchivoHerramienta(){
 	}
 }
 
-
-def iniciarGradle(){
-	if (fileExists('build.gradle')) {
-		echo build;
-		return "";
-	} else {
-		return null;
-	}
-}
-
-def iniciarMaven(){
-	if (fileExists('pom.xml')) {
-		def pomFile = readFile("pom.xml");
-		def pom = new XmlParser().parseText(pomFile);
-		return pom["version"].text().trim();
-	} else {
-		return null;
-	}
-}
-
 def iniciarVariablesEntorno(){
 	echo "obtenerVersion";
 	def herramienta = env.BUILD_TOOL;
@@ -79,5 +59,25 @@ def iniciarVariablesEntorno(){
 		iniciarGradle();
 	}
 }
+
+def iniciarGradle(){
+	if (fileExists('build.gradle')) {
+		echo build.version;
+		env.VERSION = build.version;
+	} else {
+		echo "Archivo build.gradle no existe";
+	}
+}
+
+def iniciarMaven(){
+	if (fileExists('pom.xml')) {
+		def pomFile = readFile("pom.xml");
+		def pom = new XmlParser().parseText(pomFile);
+		env.VERSION = pom["version"].text().trim();
+	} else {
+		echo "Archivo pom.xml no existe";
+	}
+}
+
 
 return this;
