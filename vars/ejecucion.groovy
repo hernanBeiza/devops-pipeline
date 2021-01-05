@@ -33,7 +33,8 @@ def call(){
 					    	env.ALUMNO="Hernán Beiza";
 					    	String paramHerramienta = params.paramHerramienta;
 					    	env.BUILD_TOOL = paramHerramienta;
-					    	String tipoDeRama = validaciones.obtenerTipoDeRama(); 
+					    	String tipoDeRama = validaciones.obtenerTipoDeRama();
+					    	env.BRANCH_TYPE = validaciones.obtenerTipoDeRama();
 					    	echo "paramHerramienta ${paramHerramienta}";					    	
 					    	echo "tipoDeRama ${tipoDeRama}";
 					    	if(paramHerramienta == "gradle" && tipoDeRama == "CD"){
@@ -56,7 +57,7 @@ def call(){
 	    post {
 	        success {
 	        	echo "Ejecución exitosa [${env.ALUMNO}][${env.JOB_NAME}][${env.BUILD_TOOL}]";
-	            slackSend channel: 'D01E5ED8TK2', color: 'good', message: "Ejecución exitosa [${env.ALUMNO}][${env.JOB_NAME}][${env.BUILD_TOOL}]", teamDomain: 'dipdevopsusach2020', tokenCredentialId: 'jenkins-slack'
+	            slackSend channel: 'D01E5ED8TK2', color: 'good', message: "Ejecución exitosa [${env.ALUMNO}][${env.JOB_NAME}][${env.BUILD_TOOL}][${env.BRANCH_TYPE}]", teamDomain: 'dipdevopsusach2020', tokenCredentialId: 'jenkins-slack'
 	        }
 	        failure {
 		    	echo "Ejecución fallida [${env.ALUMNO}][${env.JOB_NAME}][${env.BUILD_TOOL}] en stage [${env.STAGE_NAME}]";
