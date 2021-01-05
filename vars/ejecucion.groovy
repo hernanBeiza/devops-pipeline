@@ -39,12 +39,14 @@ def call(){
 					    	echo "tipoDeRama ${tipoDeRama}";
 					    	if(paramHerramienta == "maven" && tipoDeRama == "CD"){
 					    		gradleCD.iniciar();
-					    	} else if if(paramHerramienta == "maven" && tipoDeRama == "CI"){
+					    	} else if (paramHerramienta == "maven" && tipoDeRama == "CI"){
 					    		gradleCI.iniciar();
-					    	} else if if(paramHerramienta == "gradle" && tipoDeRama == "CD"){
+					    	} else if (paramHerramienta == "gradle" && tipoDeRama == "CD"){
 					    		mavenCD.iniciar();
-					    	} else if if(paramHerramienta == "gradle" && tipoDeRama == "CI"){
+					    	} else if (paramHerramienta == "gradle" && tipoDeRama == "CI"){
 					    		mavenCI.iniciar();
+					    	} else {
+					    		echo "Herramienta o tipo de rama no soportadas";
 					    	}
 					    }
 		      		}
