@@ -7,7 +7,7 @@ import cl.*
 
 def call(){
 	echo "call(); maven.groovy";
-
+    figlet "maven";
     def mensajes = new Mensajes();
     mensajes.saludar("Hernán");
     

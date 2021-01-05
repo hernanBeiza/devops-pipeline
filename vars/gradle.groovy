@@ -6,6 +6,7 @@
 
 def call(){
 	echo "call(); gradle.groovy";
+    figlet "gradle";
 
 	String paramStage = params.paramStage;
     echo "paramStage ${paramStage}";
