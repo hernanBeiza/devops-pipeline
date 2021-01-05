@@ -67,6 +67,7 @@ def iniciarGradle(){
 		def versionValue = sh(returnStdout: true, script: "cat build.gradle | grep -o 'version = [^,]*'").trim()
 		def version = versionValue.split(/=/)[1]
 		echo version;
+		env.VERSION = version;
 	} else {
 		echo "Archivo build.gradle no existe";
 	}
