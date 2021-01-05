@@ -1,8 +1,4 @@
-/*
-	forma de invocación de método call:
-	def ejecucion = load 'script.groovy'
-	ejecucion.call()
-*/
+import cl.*;
 
 def call(){
 	pipeline {
@@ -30,13 +26,19 @@ def call(){
 			      		//sh "env"
 					    stage('iniciar') {
 					    	echo "iniciar"
+						    def mensajes = new Mensajes();
+						    mensajes.saludar("Iniciando...");
+
 					    	env.ALUMNO="Hernán Beiza";
 					    	String paramHerramienta = params.paramHerramienta;
 					    	env.BUILD_TOOL = paramHerramienta;
-					    	String tipoDeRama = validaciones.obtenerTipoDeRama();
-					    	env.BRANCH_NAME= validaciones.obtenerNombreDeRama();
-					    	echo "paramHerramienta ${paramHerramienta}";					    	
+					    	String tipoDeRama = utils.obtenerTipoDeRama();
+					    	env.BRANCH_NAME= utils.obtenerNombreDeRama();
+					    	String version = obtenerVersion();
+					    	env.VERSION = version;
+					    	echo "paramHerramienta ${paramHerramienta}";
 					    	echo "tipoDeRama ${tipoDeRama}";
+					    	echo "version ${version}";
 					    	if(paramHerramienta == "gradle" && tipoDeRama == "CD"){
 					    		gradleCD.iniciar();
 					    	} else if (paramHerramienta == "gradle" && tipoDeRama == "CI"){
@@ -53,7 +55,7 @@ def call(){
 				}
 	    	}
 		}
-	    //Manejar si el pipeline fue exitoso o fallido
+	    //Manejar si el pipeline fue exitoso o fallido y enviar un mensaje en Slack
 	    post {
 	        success {
 	        	echo "Ejecución exitosa [${env.ALUMNO}][${env.JOB_NAME}][${env.BUILD_TOOL}]";

@@ -1,7 +1,8 @@
 package cl
 
 def saludar(mensaje){
-	echo "Hola ${mensaje}"
+    figlet "${mensaje}";
+
 }
 
 return this;

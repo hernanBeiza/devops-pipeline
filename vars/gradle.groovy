@@ -1,9 +1,3 @@
-/*
-	forma de invocación de método call:
-	def ejecucion = load 'script.groovy'
-	ejecucion.call()
-*/
-
 def call(){
 	echo "call(); gradle.groovy";
     figlet "gradle";
@@ -85,13 +79,4 @@ def etapas(pasadas=['build','test','sonar','run','rest','nexus']){
     }
 }
 */
-
-def ci(pasadas=['buildAndTest','sonar','runJar','rest','nexusCI']){
-    figlet "ci";
-
-}
-
-def cd(pasadas=['downloadNexus','runDownloadedJar','rest','nexusCD']){
-	figlet "cd";
-}
 return this;

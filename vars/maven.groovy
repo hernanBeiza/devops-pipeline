@@ -1,8 +1,3 @@
-/*
-	forma de invocación de método call:
-	def ejecucion = load 'script.groovy'
-	ejecucion.call()
-*/
 import cl.*
 
 def call(){
@@ -26,7 +21,7 @@ def call(){
     }
     */
 }
-
+/*
 def etapas(pasadas=['build','test','sonar','run','rest','nexus']){
     Boolean noEncontrada = false;
     if(pasadas.contains("build") || pasadas.contains("test")){
@@ -81,15 +76,5 @@ def etapas(pasadas=['build','test','sonar','run','rest','nexus']){
         echo "Tarea(s) ${pasadas} no encontrada(s)";
     }
 }
-
-def ci(){
-    figlet "CI";
-    sh "env.GIT_BRANCH";
-}
-
-def cd(){
-    figlet "CD"; 
-    sh "env.GIT_BRANCH";
-}
-
+*/
 return this;
