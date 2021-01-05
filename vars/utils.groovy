@@ -63,8 +63,8 @@ def iniciarVariablesEntorno(){
 
 def iniciarGradle(){
 	if (fileExists('build.gradle')) {
-		echo "${build.version}";
-		env.VERSION = build.version;
+		def buildGradle = readFile("build.gradle");
+		echo buildGradle;
 	} else {
 		echo "Archivo build.gradle no existe";
 	}
@@ -75,6 +75,8 @@ def iniciarMaven(){
 		def pomFile = readFile("pom.xml");
 		def pom = new XmlParser().parseText(pomFile);
 		env.VERSION = pom["version"].text().trim();
+		env.PROJECTGROUPID = pom["groupdId"].text().trim();
+		env.ARTIFACTID = pom["artifactId"].text().trim();
 	} else {
 		echo "Archivo pom.xml no existe";
 	}
