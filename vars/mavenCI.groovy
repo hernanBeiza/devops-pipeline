@@ -1,7 +1,6 @@
 def iniciar(){
     figlet "MAVEN CI";
 	String paramStage = params.paramStage;
-
     if (paramStage=="") {
         echo "Ejecutar todo";
         etapas();

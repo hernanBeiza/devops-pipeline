@@ -1,5 +1,15 @@
 def iniciar(){
     figlet "MAVEN CD";
+	String paramStage = params.paramStage;
+
+    if (paramStage=="") {
+        echo "Ejecutar todo";
+        etapas();
+    } else {
+        echo "Ejecutar solo las configuradas";
+        def pasadas = paramStage.split(":");
+        etapas(pasadas);
+    }
 }
 
 def etapas(pasadas=['build','test','sonar','run','rest','nexus']){
