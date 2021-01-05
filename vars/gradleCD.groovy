@@ -19,6 +19,7 @@ def etapas(pasadas=['downloadNexus','runDownloadedJar','rest','nexusCD']){
 		stage('downloadNexus') {
 			echo env.STAGE_NAME;
 			sh "curl -X GET 'http://localhost:8081/repository/test-nexus/com/devopsusach2020/DevOpsUsach2020/1.0.0-DEVELOP/DevOpsUsach2020-1.0.0-DEVELOP.jar'";
+			sh "ls -l"
 		}
     } else {
         noEncontrada = true;
@@ -26,7 +27,7 @@ def etapas(pasadas=['downloadNexus','runDownloadedJar','rest','nexusCD']){
 	if(pasadas.contains("runDownloadedJar")){
 		stage('runDownloadedJar') {			
 			echo env.STAGE_NAME;
-			sh 'nohup bash ./gradlew bootRun &'
+			//sh 'nohup bash ./gradlew bootRun &'
 		}
     } else {
         noEncontrada = true;
