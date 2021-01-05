@@ -59,7 +59,7 @@ def etapas(pasadas=['build','test','sonar','run','rest','nexusCI']){
 		stage('nexusCI') {
 			echo env.STAGE_NAME
 			//env.GIT_BRANCH;
-			nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: "./build/libs/DevOpsUsach2020-${env.VERSION}.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: "${env.VERSION}-${env.BRANCH_NAME}"]]]
+			nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: "./build/libs/DevOpsUsach2020-${env.VERSION}.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: "${env.VERSION}"]]]
 		}
 	 } else {
         noEncontrada = true;

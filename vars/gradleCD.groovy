@@ -44,7 +44,7 @@ def etapas(pasadas=['downloadNexus','runDownloadedJar','rest','nexusCD']){
 	if(pasadas.contains("nexusCD")){
 		stage('nexusCD') {
 			echo env.STAGE_NAME;
-			nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: "./DevOpsUsach2020-${env.VERSION}-${env.BRANCH_NAME}.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: "${env.VERSION}-${env.BRANCH_NAME}"]]]
+			nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: "./DevOpsUsach2020-${env.VERSION}-${env.BRANCH_NAME}.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: "${env.VERSION}"]]]
 		}
 	 } else {
         noEncontrada = true;
