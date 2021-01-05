@@ -50,33 +50,34 @@ def verificarArchivoHerramienta(){
 	}
 }
 
-def obtenerVersionGradle(){
+
+def iniciarGradle(){
 	if (fileExists('build.gradle')) {
-		echo build.gradle;
+		echo build;
 		return "";
 	} else {
 		return null;
 	}
 }
 
-def obtenerVersionMaven(){
-	if (fileExists('pom.gradle')) {
-		return "";
+def iniciarMaven(){
+	if (fileExists('pom.xml')) {
+		def pomFile = readFile("pom.xml");
+		def pom = new XmlParser().parseText(pomFile);
+		return pom["version"].text().trim();
 	} else {
 		return null;
 	}
 }
 
-def obtenerVersion(){
+def iniciarVariablesEntorno(){
 	echo "obtenerVersion";
 	def herramienta = env.BUILD_TOOL;
 	if(herramienta=="maven"){
-		def version = obtenerVersionMaven();
+		iniciarMaven();
 	} else if (herramienta=="gradle"){
-		def version = obtenerVersionGradle();
+		iniciarGradle();
 	}
-	env.VERSION = version;
-	return vesion;
 }
 
 return this;
