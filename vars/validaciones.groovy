@@ -1,9 +1,15 @@
 def obtenerTipoDeRama(){
-	echo "obtenerTipoDeRama";
-	sh "env";
+	//echo "obtenerTipoDeRama";
+	//sh "env";
 	def rama = env.GIT_BRANCH;
-	echo "rama ${rama}";
-	return "";
+	echo "obtenerTipoDeRama ${rama}";
+	if(rama.contains("develop"))){
+		return "CD";
+	} else if (rama.contains("feature")){
+		return "CI";
+	} else {
+		return "Rama no soportada";
+	}
 }
 
 return this;
