@@ -35,6 +35,7 @@ def call(){
 					    	env.BRANCH_NAME= utils.obtenerNombreDeRama();
 					    	String version = utils.obtenerVersion();
 					    	env.VERSION = version;
+					    	sh "ls -l";
 					    	echo "paramHerramienta ${paramHerramienta}";
 					    	echo "tipoDeRama ${tipoDeRama}";
 					    	echo "version ${version}";
