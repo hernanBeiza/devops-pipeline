@@ -1,8 +1,7 @@
 package cl
 
-def saludar(mensaje){
+def mostrar(mensaje){
     figlet "${mensaje}";
-
 }
 
 return this;

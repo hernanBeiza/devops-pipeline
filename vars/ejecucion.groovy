@@ -27,14 +27,13 @@ def call(){
 					    stage('iniciar') {
 					    	echo "iniciar"
 						    def mensajes = new Mensajes();
-						    mensajes.saludar("Iniciando...");
-
+						    mensajes.mostrar("Iniciando...");
 					    	env.ALUMNO="Hernán Beiza";
 					    	String paramHerramienta = params.paramHerramienta;
 					    	env.BUILD_TOOL = paramHerramienta;
 					    	String tipoDeRama = utils.obtenerTipoDeRama();
 					    	env.BRANCH_NAME= utils.obtenerNombreDeRama();
-					    	String version = obtenerVersion();
+					    	String version = utils.obtenerVersion();
 					    	env.VERSION = version;
 					    	echo "paramHerramienta ${paramHerramienta}";
 					    	echo "tipoDeRama ${tipoDeRama}";
