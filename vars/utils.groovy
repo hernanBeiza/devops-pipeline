@@ -50,6 +50,7 @@ def verificarArchivoHerramienta(){
 	}
 }
 
+//TODO Pasar todo el seteo de variables de entorno a una única sección
 def iniciarVariablesEntorno(){
 	echo "iniciarVariablesEntorno";
 	def herramienta = env.BUILD_TOOL;
