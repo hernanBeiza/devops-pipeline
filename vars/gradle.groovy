@@ -1,3 +1,4 @@
+/*
 def call(){
 	echo "call(); gradle.groovy";
     figlet "gradle";
@@ -7,7 +8,6 @@ def call(){
 
     sh "env.GIT_BRANCH";
 
-	/*
 	if (paramStage=="") {
 		echo "Ejecutar todo";
 		etapas();		
@@ -16,8 +16,8 @@ def call(){
 		def pasadas = paramStage.split(":");
 		etapas(pasadas);
 	}
-	*/
 }
+*/
 
 /*
 def etapas(pasadas=['build','test','sonar','run','rest','nexus']){

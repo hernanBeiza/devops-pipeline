@@ -1,5 +1,5 @@
 import cl.*
-
+/*
 def call(){
 	echo "call(); maven.groovy";
     figlet "maven";
@@ -10,7 +10,6 @@ def call(){
     echo "paramStage ${paramStage}";
 
     sh "env.GIT_BRANCH";
-    /*
     if (paramStage=="") {
         echo "Ejecutar todo";
         etapas();
@@ -19,8 +18,8 @@ def call(){
         def pasadas = paramStage.split(":");
         etapas(pasadas);
     }
-    */
 }
+*/
 /*
 def etapas(pasadas=['build','test','sonar','run','rest','nexus']){
     Boolean noEncontrada = false;
