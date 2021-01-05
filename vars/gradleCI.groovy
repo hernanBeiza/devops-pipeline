@@ -41,7 +41,6 @@ def etapas(pasadas=['build','test','sonar','run','rest','nexusCI']){
 	if(pasadas.contains("run")){
 		stage('run') {
 			echo env.STAGE_NAME
-
 			sh 'nohup bash ./gradlew bootRun &'
 		}
     } else {
@@ -50,7 +49,6 @@ def etapas(pasadas=['build','test','sonar','run','rest','nexusCI']){
 	if(pasadas.contains("rest")){
 		stage('rest') {
 			echo env.STAGE_NAME
-
 			//sh './gradle build'
 			sh "sleep 30 && curl -X GET 'http://localhost:8082/rest/mscovid/test?msg=testing'"
 		}
