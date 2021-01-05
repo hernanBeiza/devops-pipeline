@@ -37,13 +37,13 @@ def call(){
 					    	String tipoDeRama = validaciones.obtenerTipoDeRama(); 
 					    	echo "paramHerramienta ${paramHerramienta}";					    	
 					    	echo "tipoDeRama ${tipoDeRama}";
-					    	if(paramHerramienta == "maven" && tipoDeRama == "CD"){
+					    	if(paramHerramienta == "gradle" && tipoDeRama == "CD"){
 					    		gradleCD.iniciar();
-					    	} else if (paramHerramienta == "maven" && tipoDeRama == "CI"){
-					    		gradleCI.iniciar();
-					    	} else if (paramHerramienta == "gradle" && tipoDeRama == "CD"){
-					    		mavenCD.iniciar();
 					    	} else if (paramHerramienta == "gradle" && tipoDeRama == "CI"){
+					    		gradleCI.iniciar();
+					    	} else if (paramHerramienta == "maven" && tipoDeRama == "CD"){
+					    		mavenCD.iniciar();
+					    	} else if (paramHerramienta == "maven" && tipoDeRama == "CI"){
 					    		mavenCI.iniciar();
 					    	} else {
 					    		echo "Herramienta o tipo de rama no soportadas";
