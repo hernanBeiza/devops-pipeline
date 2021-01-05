@@ -18,7 +18,7 @@ def etapas(pasadas=['downloadNexus','runDownloadedJar','rest','nexusCD']){
 	if(pasadas.contains("downloadNexus")){
 		stage('downloadNexus') {
 			echo env.STAGE_NAME;
-			sh "curl -X GET -u admin:admin 'http://localhost:8081/repository/test-nexus/com/devopsusach2020/DevOpsUsach2020/1.0.0-DEVELOP/DevOpsUsach2020-1.0.0-DEVELOP.jar -O'";
+			sh "curl -X GET -u admin:admin http://localhost:8081/repository/test-nexus/com/devopsusach2020/DevOpsUsach2020/1.0.0-DEVELOP/DevOpsUsach2020-1.0.0-DEVELOP.jar -O";
 			sh "ls -l"
 		}
     } else {
