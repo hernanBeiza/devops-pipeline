@@ -26,7 +26,6 @@ def call(){
 			      		sh "env"
 					    stage('iniciar') {
 					    	echo "iniciar"
-					    	sh "ls -l";
 						    def mensajes = new Mensajes();
 						    mensajes.mostrar("Iniciando...");
 					    	env.ALUMNO="Hernán Beiza";

@@ -64,7 +64,7 @@ def iniciarVariablesEntorno(){
 def iniciarGradle(){
 	if (fileExists('build.gradle')) {
 		def buildGradle = readFile("build.gradle");
-		echo buildGradle.version;
+		echo project;
 	} else {
 		echo "Archivo build.gradle no existe";
 	}
