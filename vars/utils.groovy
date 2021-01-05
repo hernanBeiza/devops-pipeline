@@ -51,13 +51,14 @@ def verificarArchivoHerramienta(){
 }
 
 def iniciarVariablesEntorno(){
-	echo "obtenerVersion";
+	echo "iniciarVariablesEntorno";
 	def herramienta = env.BUILD_TOOL;
 	if(herramienta=="maven"){
 		iniciarMaven();
 	} else if (herramienta=="gradle"){
 		iniciarGradle();
 	}
+	sh "env";
 }
 
 def iniciarGradle(){
