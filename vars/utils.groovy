@@ -37,11 +37,11 @@ def verificarArchivoHerramienta(){
 			return false;
 		}
 	} else if(herramienta=="gradle"){
-		if (fileExists('settings.gradle')) {
-			echo "Archivo settings.gradle existe";
+		if (fileExists('build.gradle')) {
+			echo "Archivo build.gradle existe";
 			return true;
 		} else {
-			echo "Archivo settings.gradle no existe";
+			echo "Archivo build.gradle no existe";
 			return false;
 		}
 	} else {
@@ -51,8 +51,8 @@ def verificarArchivoHerramienta(){
 }
 
 def obtenerVersionGradle(){
-	if (fileExists('settings.gradle')) {
-		echo version;
+	if (fileExists('build.gradle')) {
+		echo build.gradle;
 		return "";
 	} else {
 		return null;
@@ -69,6 +69,7 @@ def obtenerVersionMaven(){
 
 def obtenerVersion(){
 	echo "obtenerVersion";
+	def herramienta = env.BUILD_TOOL;
 	if(herramienta=="maven"){
 		def version = obtenerVersionMaven();
 	} else if (herramienta=="gradle"){
