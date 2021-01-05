@@ -24,16 +24,15 @@ def call(){
 		stages {
 			stage('Pipeline') {
 				steps {
-			      	script {
-			      		
+			      	script {			      	
 			      		//Variables de entorno del sistema
 			      		//bat "set"
 			      		//sh "env"
-
 					    stage('iniciar') {
 					    	echo "iniciar"
 					    	env.ALUMNO="Hernán Beiza";
 					    	String paramHerramienta = params.paramHerramienta;
+					    	env.BUILD_TOOL = paramHerramienta;
 					    	String tipoDeRama = validaciones.obtenerTipoDeRama(); 
 					    	echo "paramHerramienta ${paramHerramienta}";					    	
 					    	echo "tipoDeRama ${tipoDeRama}";
