@@ -12,4 +12,18 @@ def obtenerTipoDeRama(){
 	}
 }
 
+def obtenerNombreDeRama(){
+	def rama = env.GIT_BRANCH;
+	echo "obtenerTipoDeRama ${rama}";	
+	if(rama.toUpperCase().contains("RELEASE")){
+		return "RELEASE";
+	} else if (rama.toUpperCase().contains("DEVELOP")){
+		return "DEVELOP";
+	} else if (rama.toUpperCase().contains("FEATURE")){
+		return "FEATURE";
+	} else {
+		return "Nombre de rama no soportado";
+	}
+}
+
 return this;

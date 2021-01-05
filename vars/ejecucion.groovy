@@ -34,7 +34,7 @@ def call(){
 					    	String paramHerramienta = params.paramHerramienta;
 					    	env.BUILD_TOOL = paramHerramienta;
 					    	String tipoDeRama = validaciones.obtenerTipoDeRama();
-					    	env.BRANCH_TYPE = validaciones.obtenerTipoDeRama();
+					    	env.BRANCH_NAME= validaciones.obtenerNombreDeRama();
 					    	echo "paramHerramienta ${paramHerramienta}";					    	
 					    	echo "tipoDeRama ${tipoDeRama}";
 					    	if(paramHerramienta == "gradle" && tipoDeRama == "CD"){
