@@ -20,7 +20,7 @@ def etapas(pasadas=['build','test','sonar','run','rest','nexusCI']){
 			echo env.STAGE_NAME
 			//Usar el gradlewrapper, incluido en el repo
 			sh './gradlew clean build';
-			sh "ls -l";
+			sh "ls ./build/libs -l";
 		}
     } else {
         noEncontrada = true;
