@@ -23,7 +23,7 @@ def call(){
 			      	script {			      	
 			      		//Variables de entorno del sistema
 			      		//bat "set"
-			      		sh "env"
+			      		//sh "env"
 					    stage('iniciar') {
 					    	echo "iniciar"
 						    def mensajes = new Mensajes();
