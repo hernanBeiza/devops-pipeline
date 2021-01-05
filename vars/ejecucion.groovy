@@ -25,6 +25,11 @@ def call(){
 			stage('Pipeline') {
 				steps {
 			      	script {
+			      		
+			      		//Variables de entorno del sistema
+			      		//bat "set"
+			      		sh "env"
+
 					    stage('iniciar') {
 					    	echo "iniciar"
 					    	String paramHerramienta = params.paramHerramienta;
