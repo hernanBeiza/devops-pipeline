@@ -32,29 +32,20 @@ def call(){
 
 					    stage('iniciar') {
 					    	echo "iniciar"
-					    	String paramHerramienta = params.paramHerramienta;
-					    	echo "paramHerramienta ${paramHerramienta}";					    	
 					    	env.ALUMNO="Hernán Beiza";
-					    	echo "tipoDeRama ${validaciones.obtenerTipoDeRama()}";
-
-					    	if(paramHerramienta=="maven"){
-					    		env.BUILD_TOOL="MAVEN";
-								//Esto no funciona usando un pipeline como librería, 
-								//porque los archivos no están dentro el workspace
-								//def ejecucionMaven = load 'maven.groovy'
-								//ejecucionMaven.call()
-								//$("{paramHerramienta").call();
-								//Recordar que ahora los archivos están en vars
-								//maven.call();
-				    		} else {
-					    		env.BUILD_TOOL="GRADLE";
-								//Esto no funciona usando un pipeline como librería, 
-								//porque los archivos no están dentro el workspace
-								//def ejecucionGradle = load 'gradle.groovy'
-								//ejecucionGradle.call()
-								//Recordar que ahora los archivos están en vars
-								//gradle.call();
-				    		}
+					    	String paramHerramienta = params.paramHerramienta;
+					    	String tipoDeRama = validaciones.obtenerTipoDeRama(); 
+					    	echo "paramHerramienta ${paramHerramienta}";					    	
+					    	echo "tipoDeRama ${tipoDeRama}";
+					    	if(paramHerramienta == "maven" && tipoDeRama == "CD"){
+					    		gradleCD.iniciar();
+					    	} else if if(paramHerramienta == "maven" && tipoDeRama == "CI"){
+					    		gradleCI.iniciar();
+					    	} else if if(paramHerramienta == "gradle" && tipoDeRama == "CD"){
+					    		mavenCD.iniciar();
+					    	} else if if(paramHerramienta == "gradle" && tipoDeRama == "CI"){
+					    		mavenCI.iniciar();
+					    	}
 					    }
 		      		}
 				}
