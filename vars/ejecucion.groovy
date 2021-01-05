@@ -27,7 +27,7 @@ def call(){
 			      	script {			      	
 			      		//Variables de entorno del sistema
 			      		//bat "set"
-			      		sh "env"
+			      		//sh "env"
 					    stage('iniciar') {
 					    	echo "iniciar"
 					    	env.ALUMNO="Hernán Beiza";
