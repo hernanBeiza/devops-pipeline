@@ -56,7 +56,7 @@ def call(){
 	    post {
 	        success {
 	        	echo "Ejecución exitosa [${env.ALUMNO}][${env.JOB_NAME}][${env.BUILD_TOOL}]";
-	            slackSend channel: 'D01E5ED8TK2', color: 'good', message: "Ejecución exitosa [${env.ALUMNO}][${env.JOB_NAME}][${env.BUILD_TOOL}][${env.BRANCH_TYPE}]", teamDomain: 'dipdevopsusach2020', tokenCredentialId: 'jenkins-slack'
+	            slackSend channel: 'D01E5ED8TK2', color: 'good', message: "Ejecución exitosa [${env.ALUMNO}][${env.JOB_NAME}][${env.BUILD_TOOL}][${env.BRANCH_NAME}]", teamDomain: 'dipdevopsusach2020', tokenCredentialId: 'jenkins-slack'
 	        }
 	        failure {
 		    	echo "Ejecución fallida [${env.ALUMNO}][${env.JOB_NAME}][${env.BUILD_TOOL}] en stage [${env.STAGE_NAME}]";
