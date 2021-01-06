@@ -19,7 +19,7 @@ def etapas(pasadas=['downloadNexus','runDownloadedJar','rest','nexusCD']){
 		stage('downloadNexus') {
 			echo env.STAGE_NAME;
 			sh "curl -X GET -u admin:admin http://localhost:8081/repository/test-nexus/com/devopsusach2020/DevOpsUsach2020/${env.VERSION}-DEVELOP/DevOpsUsach2020-${env.VERSION}-DEVELOP.jar -O";
-			sh "ls -l"
+			//sh "ls -l"
 		}
     } else {
         noEncontrada = true;
