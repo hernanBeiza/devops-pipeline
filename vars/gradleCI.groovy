@@ -9,7 +9,7 @@ def iniciar(){
 	    etapasPasadas = paramStage.split(":");
 	}
 	//runEjecutar ya que run choca con el nombre definido antes
-	def etapasOriginales = ['build','test','sonar','runEjecutar','rest','nexusCI'];
+	def etapasOriginales = ['build','test','sonar','runEjecutar','rest','nexusCI','createBranchs'];
 	def etapasValidadas = utils.validarEtapas(etapasPasadas,etapasOriginales);
 	
     etapasValidadas.each{
@@ -141,7 +141,7 @@ def nexusCI(){
 	}
 }
 
-def createBranch(){
+def createBranchs(){
 	def git = new GitMetodos();
 	//Ver como obtener parámetro
 	//El versionado es dinámico, verificar versión de pom.xml o build.gradle
