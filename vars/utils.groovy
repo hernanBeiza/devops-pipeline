@@ -55,7 +55,7 @@ def validarEtapas(etapasPasadas, etapasOriginales){
     println etapasOriginales;
     def etapasError = [];
     def etapasValidas = [];
-    
+
     if(!etapasPasadas.isEmpty()){
         etapasPasadas.each{
             println "Etapa ${it}";
@@ -77,12 +77,7 @@ def validarEtapas(etapasPasadas, etapasOriginales){
     } else {
         etapasValidas = etapasOriginales;
         println "Parámetro de stages vacío.\nSe ejecutarán todas los stages en el siguiente orden :\n${etapasValidas}"
-    }
-	} else {
-        etapasValidas = etapasOriginales;
-        println "Parámetro de stages vacío.\nSe ejecutarán todas los stages en el siguiente orden :\n${etapasValidas}"
-    }
-
+	}
     return etapasValidas;
 }
 
