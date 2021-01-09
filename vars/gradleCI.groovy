@@ -79,22 +79,24 @@ def nexusCI(){
 }
 
 def createBranchs(){
-	def git = new GitMetodos();
-	//Ver como obtener parámetro
-	//El versionado es dinámico, verificar versión de pom.xml o build.gradle
-	//El nombre de la rama debe ser dinámico
-	//env.GIT_BRANCH debería ser feature-* o develop
-	if (git.checkIfBranchExists('release-v1-0-0')){
-		if(git.isBranchUpdated(env.GIT_BRANCH,'release-v1-0-0')){
-			echo "Rama creada y actualizada contra " + env.GIT_BRANCH;
+	stage('nexusCI') {
+		echo env.STAGE_NAME
+		def git = new GitMetodos();
+		//Ver como obtener parámetro
+		//El versionado es dinámico, verificar versión de pom.xml o build.gradle
+		//El nombre de la rama debe ser dinámico
+		//env.GIT_BRANCH debería ser feature-* o develop
+		if (git.checkIfBranchExists('release-v1-0-0')){
+			if(git.isBranchUpdated(env.GIT_BRANCH,'release-v1-0-0')){
+				echo "Rama creada y actualizada contra " + env.GIT_BRANCH;
+			} else {
+				git.deleteBranch('release-v1-0-0');
+				git.createBranch('release-v1-0-0',env.GIT_BRANCH);
+			}
 		} else {
-			git.deleteBranch('release-v1-0-0');
 			git.createBranch('release-v1-0-0',env.GIT_BRANCH);
 		}
-	} else {
-		git.createBranch('release-v1-0-0',env.GIT_BRANCH);
 	}
-
 }
 
 return this;
