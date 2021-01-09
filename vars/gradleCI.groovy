@@ -8,8 +8,8 @@ def iniciar(){
     if(!paramStage.isEmpty()){
 	    etapasPasadas = paramStage.split(":");
 	}
-	//runEjecutar ya que run choca con el nombre definido antes
-	def etapasOriginales = ['build','test','sonar','runEjecutar','rest','nexusCI'];
+	//ejecutar ya que run choca con el nombre definido antes
+	def etapasOriginales = ['build','test','sonar','ejecutar','rest','nexusCI'];
 	def etapasValidadas = utils.validarEtapas(etapasPasadas,etapasOriginales);
 	
     etapasValidadas.each{
@@ -117,8 +117,8 @@ def sonar(){
 	}
 }
 
-def runEjecutar(){
-	stage('runEjecutar') {
+def ejecutar(){
+	stage('ejecutar') {
 		echo env.STAGE_NAME
 		sh 'nohup bash ./gradlew bootRun &'
 	}
