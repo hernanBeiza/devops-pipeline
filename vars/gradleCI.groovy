@@ -81,6 +81,7 @@ def nexusCI(){
 def createBranchs(){
 	stage('nexusCI') {
 		echo env.STAGE_NAME
+		/*
 		def git = new GitMetodos();
 		//Ver como obtener parámetro
 		//El versionado es dinámico, verificar versión de pom.xml o build.gradle
@@ -96,6 +97,7 @@ def createBranchs(){
 		} else {
 			git.createBranch('release-v1-0-0',env.GIT_BRANCH);
 		}
+		*/
 	}
 }
 
