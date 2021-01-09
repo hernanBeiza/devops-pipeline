@@ -3,16 +3,20 @@ def iniciar(){
 	String paramStage = params.paramStage;
     echo "paramStage ${paramStage}";
 	def etapasOriginales = ['build','test','sonar','run','rest','nexusCI'];
-	if (paramStage=="") {
-		echo "Ejecutar todo";
-		echo etapas;
+	def etapasValidadas = utils.validarEtapas(etapasPasadas,etapasOriginales);
+	
+    etapasValidadas.each{
+        stage(it){
+            try{
+                "${it.toLowerCase()}"()
+            }catch(Exception e) {
+            	echo e;
+                //env.MensajeErrorSlack = "Stage ${it.toLowerCase()} tiene problemas : ${e}"
+                //error env.MensajeErrorSlack
+            }
+        }
+    }
 
-	} else {
-		echo "Ejecutar solo las configuradas";
-		def etapasPasadas = paramStage.split(":");
-		def etapasValidadas = utils.validarEtapas(etapasPasadas,etapasOriginales);
-		echo etapasValidadas;
-	}
 }
 
 //TODO
