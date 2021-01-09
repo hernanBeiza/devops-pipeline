@@ -8,14 +8,15 @@ def iniciar(){
     if(!paramStage.isEmpty()){
 	    etapasPasadas = paramStage.split(":");
 	}
-	//ejecutar ya que run choca con el nombre definido antes
-	def etapasOriginales = ['build','test','sonar','ejecutar','rest','nexusCI'];
+	//runEjecutar ya que run choca con el nombre definido antes
+	def etapasOriginales = ['build','test','sonar','runEjecutar','rest','nexusCI'];
 	def etapasValidadas = utils.validarEtapas(etapasPasadas,etapasOriginales);
 	
     etapasValidadas.each{
         stage(it){
             try{
-                "${it.toLowerCase()}"()
+                //"${it.toLowerCase()}"()
+                "${it}"()
             }catch(Exception e) {
             	echo e;
                 //env.MensajeErrorSlack = "Stage ${it.toLowerCase()} tiene problemas : ${e}"
@@ -117,8 +118,8 @@ def sonar(){
 	}
 }
 
-def ejecutar(){
-	stage('ejecutar') {
+def runEjecutar(){
+	stage('runEjecutar') {
 		echo env.STAGE_NAME
 		sh 'nohup bash ./gradlew bootRun &'
 	}
@@ -140,7 +141,7 @@ def nexusCI(){
 	}
 }
 
-def crearRamaRelease(){
+def createBranch(){
 	def git = new GitMetodos();
 	//Ver como obtener parámetro
 	//El versionado es dinámico, verificar versión de pom.xml o build.gradle
