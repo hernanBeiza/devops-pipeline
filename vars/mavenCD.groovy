@@ -6,7 +6,7 @@ def iniciar(){
         etapasPasadas = paramStage.split(":");
     }
     //runEjecutar ya que run choca con el nombre definido antes
-    def etapasOriginales = ['build','test','sonar','runEjecutar','rest','nexus'];
+    def etapasOriginales = ['build','test','sonar','runEjecutar','rest','nexusCD'];
     def etapasValidadas = utils.validarEtapas(etapasPasadas,etapasOriginales);
     
     etapasValidadas.each{
@@ -67,8 +67,8 @@ def rest(){
     }
 }
 
-def nexus(){
-    stage('nexus') {
+def nexusCD(){
+    stage('nexusCD') {
         echo env.STAGE_NAME
         nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: './build/DevOpsUsach2020-0.0.1.jar']], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '1.0.0']]]
     }
