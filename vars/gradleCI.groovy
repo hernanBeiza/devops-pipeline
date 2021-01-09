@@ -4,6 +4,7 @@ def iniciar(){
     figlet "GRADLE CI";
 	String paramStage = params.paramStage;
     echo "paramStage ${paramStage}";
+    def etapasPasadas = paramStage.split(":");
 	def etapasOriginales = ['build','test','sonar','run','rest','nexusCI'];
 	def etapasValidadas = utils.validarEtapas(etapasPasadas,etapasOriginales);
 	
