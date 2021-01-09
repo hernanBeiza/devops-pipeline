@@ -56,7 +56,7 @@ def validarEtapas(etapasPasadas, etapasOriginales){
     def etapasError = [];
     def etapasValidas = [];
 
-    if(!etapasPasadas.isEmpty()){
+    if(etapasPasadas != null){
         etapasPasadas.each{
             println "Etapa ${it}";
             if(etapasOriginales.contains(it)){
