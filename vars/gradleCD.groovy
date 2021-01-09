@@ -12,9 +12,9 @@ def iniciar(){
 	}
 }
 
+/*
 def etapas(pasadas=['downloadNexus','runDownloadedJar','rest','nexusCD']){
     Boolean noEncontrada = false;
-
 	if(pasadas.contains("downloadNexus")){
 		stage('downloadNexus') {
 			echo env.STAGE_NAME;
@@ -52,6 +52,37 @@ def etapas(pasadas=['downloadNexus','runDownloadedJar','rest','nexusCD']){
     if(noEncontrada){
         echo "Tarea(s) ${pasadas} no encontrada(s)";
     }
+}
+*/
+
+def downloadNexus(){
+	stage('downloadNexus') {
+		echo env.STAGE_NAME;
+		sh "curl -X GET -u admin:admin http://localhost:8081/repository/test-nexus/com/devopsusach2020/DevOpsUsach2020/${env.VERSION}-DEVELOP/DevOpsUsach2020-${env.VERSION}-DEVELOP.jar -O";
+		//sh "ls -l"
+	}
+}
+
+def runDownloadedJar(){
+	stage('runDownloadedJar') {			
+		echo env.STAGE_NAME;
+		sh 'nohup bash ./gradlew bootRun &'
+	}
+}
+
+def rest(){
+	stage('rest') {
+		echo env.STAGE_NAME;
+		//sh './gradle build'
+		sh "sleep 30 && curl -X GET 'http://localhost:8082/rest/mscovid/test?msg=testing'"
+	}
+}
+
+def nexusCD(){
+	stage('nexusCD') {
+		echo env.STAGE_NAME;
+		nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: "./DevOpsUsach2020-${env.VERSION}-DEVELOP.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: "${env.VERSION}-RELEASE"]]]
+	}
 }
 
 return this;
