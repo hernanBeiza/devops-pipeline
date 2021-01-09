@@ -79,7 +79,7 @@ def nexusCI(){
 }
 
 def createBranchs(){
-	stage('nexusCI') {
+	stage('createBranchs') {
 		echo env.STAGE_NAME
 		def git = new GitMetodos();
 		//Ver como obtener parámetro
