@@ -1,3 +1,5 @@
+import cl.*;
+
 def iniciar(){
     figlet "GRADLE CI";
 	String paramStage = params.paramStage;
@@ -134,7 +136,6 @@ def nexusCI(){
 }
 
 def crearRamaRelease(){
-
 	def git = new GitMetodos();
 	//Ver como obtener parámetro
 	//El versionado es dinámico, verificar versión de pom.xml o build.gradle
