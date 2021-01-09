@@ -59,7 +59,7 @@ def iniciarVariablesEntorno(){
 	} else if (herramienta=="gradle"){
 		iniciarGradle();
 	}
-	sh "env";
+	//sh "env";
 }
 
 def iniciarGradle(){
@@ -117,7 +117,7 @@ def validarEtapas(etapasPasadas, etapasOriginales){
         println "Parámetro de stages vacío.\nSe ejecutarán todas los stages en el siguiente orden :\n${etapasValidas}"
     }
 
-    return etapasValidas
+    return etapasValidas;
 }
 
 return this;
