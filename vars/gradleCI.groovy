@@ -116,14 +116,12 @@ def sonar(){
 	}
 }
 
-/*
 def run(){
 	stage('run') {
 		echo env.STAGE_NAME
 		sh 'nohup bash ./gradlew bootRun &'
 	}
 }
-*/
 
 def rest(){
 	stage('rest') {

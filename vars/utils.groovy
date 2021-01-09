@@ -51,8 +51,6 @@ def verificarArchivoHerramienta(){
 }
 
 def validarEtapas(etapasPasadas, etapasOriginales){
-    println etapasPasadas;
-    println etapasOriginales;
     def etapasError = [];
     def etapasValidas = [];
 
