@@ -13,7 +13,7 @@ def call(){
 	        string(
 	        	name: 'paramStage',
 	        	defaultValue: '',
-	        	description: 'Etapas a ejecutar'
+	        	description: 'Etapas a ejecutar, en formato: etapa1:etapa2:etapa3'
         	)
 		}
 

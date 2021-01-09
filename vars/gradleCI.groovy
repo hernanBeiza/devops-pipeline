@@ -5,6 +5,7 @@ def iniciar(){
 	String paramStage = params.paramStage;
     echo "paramStage ${paramStage}";
     def etapasPasadas = paramStage.split(":");
+    echo etapasPasadas.size();
 	def etapasOriginales = ['build','test','sonar','run','rest','nexusCI'];
 	def etapasValidadas = utils.validarEtapas(etapasPasadas,etapasOriginales);
 	

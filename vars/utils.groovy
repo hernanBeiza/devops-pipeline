@@ -50,6 +50,42 @@ def verificarArchivoHerramienta(){
 	}
 }
 
+def validarEtapas(etapasPasadas, etapasOriginales){
+    println etapasPasadas;
+    println etapasOriginales;
+    def etapasError = [];
+    def etapasValidas = [];
+    
+    if(!etapasPasadas.isEmpty()){
+        etapasPasadas.each{
+            println "Etapa ${it}";
+            if(etapasOriginales.contains(it)){
+                println("${it} encontrada");
+                etapasValidas.add(it)
+            } else {
+                println("${it} no encontrada");
+                etapasError.add(it)
+            }
+        }
+        //Existen Etapas con Error
+        if(etapasError.size() > 0){
+            //env.MensajeErrorSlack = " Estos stages ingresados no existen : ${etapasError}.\nStages disponibles para ejecutar:\n${etapasOriginales}"
+            //error env.MensajeErrorSlack
+            println "Estos stages ingresados no existen : ${etapasError}.\nStages disponibles para ejecutar:\n${etapasOriginales}";
+        }
+        println "Validación de stages correcta.\nSe ejecutarán los siguientes stages en orden :\n${etapasValidas}"
+    } else {
+        etapasValidas = etapasOriginales;
+        println "Parámetro de stages vacío.\nSe ejecutarán todas los stages en el siguiente orden :\n${etapasValidas}"
+    }
+	} else {
+        etapasValidas = etapasOriginales;
+        println "Parámetro de stages vacío.\nSe ejecutarán todas los stages en el siguiente orden :\n${etapasValidas}"
+    }
+
+    return etapasValidas;
+}
+
 //TODO Pasar todo el seteo de variables de entorno a una única sección
 def iniciarVariablesEntorno(){
 	echo "iniciarVariablesEntorno";
@@ -87,37 +123,5 @@ def iniciarMaven(){
 }
 
 
-def validarEtapas(etapasPasadas, etapasOriginales){
-    println etapasPasadas;
-    println etapasOriginales;
-
-    def etapasError = [];
-    def etapasValidas = [];
-    
-    if(etapasPasadas.size()>0){
-        etapasPasadas.each{
-            println "Etapa ${it}";
-            if(etapasOriginales.contains(it)){
-                println("${it} encontrada");
-                etapasValidas.add(it)
-            } else {
-                println("${it} no encontrada");
-                etapasError.add(it)
-            }
-        }
-        //Existen Etapas con Error
-        if(etapasError.size() > 0){
-            //env.MensajeErrorSlack = " Estos stages ingresados no existen : ${etapasError}.\nStages disponibles para ejecutar:\n${etapasOriginales}"
-            //error env.MensajeErrorSlack
-            println "Estos stages ingresados no existen : ${etapasError}.\nStages disponibles para ejecutar:\n${etapasOriginales}";
-        }
-        println "Validación de stages correcta.\nSe ejecutarán los siguientes stages en orden :\n${etapasValidas}"
-    } else {
-        etapasValidas = etapasOriginales;
-        println "Parámetro de stages vacío.\nSe ejecutarán todas los stages en el siguiente orden :\n${etapasValidas}"
-    }
-
-    return etapasValidas;
-}
 
 return this;
