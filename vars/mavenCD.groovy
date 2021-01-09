@@ -15,7 +15,7 @@ def iniciar(){
                 //"${it.toLowerCase()}"()
                 "${it}"()
             }catch(Exception e) {
-                echo e;
+                echo e.getMessage();
                 //env.MensajeErrorSlack = "Stage ${it.toLowerCase()} tiene problemas : ${e}"
                 //error env.MensajeErrorSlack
             }
