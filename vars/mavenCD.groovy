@@ -6,7 +6,7 @@ def iniciar(){
         etapasPasadas = paramStage.split(":");
     }
     //runEjecutar ya que run choca con el nombre definido antes
-    def etapasOriginales = ['build','test','sonar','runEjecutar','rest','nexusCI','createBranchs'];
+    def etapasOriginales = ['build','test','sonar','runEjecutar','rest','nexus'];
     def etapasValidadas = utils.validarEtapas(etapasPasadas,etapasOriginales);
     
     etapasValidadas.each{
